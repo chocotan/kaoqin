@@ -60,7 +60,7 @@
 			<th></th>
 		</tr>
 		<c:forEach var="ds" items="${dsl}">
-			<tr>
+			<tr id="ds-${ds.id}">
 				<td><fmt:formatDate value="${ds.calendar.date}" pattern="yyyy-MM-dd"></fmt:formatDate>
 				</td>
 				<td>${ds.day}</td>
@@ -73,7 +73,7 @@
 				<td class="deh" id="deh-${ds.id}">${ds.extraHours}</td>
 				<td class="dtip" id="dtip-${ds.id}">${ds.tip}</td>
 				<c:if test="${!m.submitted}">
-						<td>
+						<td class="dbt" id="dbt-${ds.id}">
 						<input type="button" onclick="change(${ds.id})" value="<fmt:message
 								key="change"></fmt:message>">
 						</td>
