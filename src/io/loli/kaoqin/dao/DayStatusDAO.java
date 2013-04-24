@@ -10,12 +10,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import io.loli.kaoqin.javabean.DayStatus;
+import io.loli.kaoqin.service.CalendarService;
 
 public class DayStatusDAO implements IDAO<DayStatus>{
 	public int result;
 	@Override
 	public void save(DayStatus t) {
-		String sql = "insert into day_status (p_id,m_id,date,startTime,endTime,breakHours,workHours,extraHours,tip) values (?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into day_status (p_id,m_id,d_id,startTime,endTime,breakHours,workHours,extraHours,tip) values (?,?,?,?,?,?,?,?,?);";
 		PreparedStatement pst=null;
 		Connection conn=null;
 		try {
@@ -23,7 +24,7 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, t.getP().getId());
 			pst.setInt(2, t.getM().getId());
-			pst.setDate(3, t.getDate());
+			pst.setInt(3, t.getCalendar().getId());
 			pst.setTime(4, t.getStartTime());
 			pst.setTime(5, t.getEndTime());
 			pst.setInt(6, t.getBreakHours());
@@ -40,7 +41,7 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 
 	@Override
 	public void update(DayStatus t) {
-		String sql = "update day_status set p_id=?,m_id=?,date=?,startTime=?,endTime=?,breakHours=?,workHours=?,extraHours=?,tip=? where id=?;";
+		String sql = "update day_status set p_id=?,m_id=?,startTime=?,endTime=?,breakHours=?,workHours=?,extraHours=?,tip=? where id=?;";
 		PreparedStatement pst=null;
 		Connection conn=null;
 		try {
@@ -48,14 +49,13 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, t.getP().getId());
 			pst.setInt(2, t.getM().getId());
-			pst.setDate(3, t.getDate());
-			pst.setTime(4, t.getStartTime());
-			pst.setTime(5, t.getEndTime());
-			pst.setInt(6, t.getBreakHours());
-			pst.setInt(7, t.getWorkHours());
-			pst.setInt(8, t.getExtraHours());
-			pst.setString(9, t.getTip());
-			pst.setInt(10,t.getId());
+			pst.setTime(3, t.getStartTime());
+			pst.setTime(4, t.getEndTime());
+			pst.setInt(5, t.getBreakHours());
+			pst.setInt(6, t.getWorkHours());
+			pst.setInt(7, t.getExtraHours());
+			pst.setString(8, t.getTip());
+			pst.setInt(9,t.getId());
 			result=pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,15 +99,15 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 				d.setId(rs.getInt("id"));
 				d.setP(new PersonDAO().findById(rs.getInt("p_id")));
 				d.setM(new MonthStatusDAO().findById(rs.getInt("m_id")));
-				d.setDate(rs.getDate("date"));
 				d.setStartTime(rs.getTime("startTime"));
 				d.setEndTime(rs.getTime("endTime"));
+				d.setCalendar(new CalendarService().findById(rs.getInt("d_id")));
 				d.setBreakHours(rs.getInt("breakHours"));
 				d.setWorkHours(rs.getInt("workHours"));
 				d.setExtraHours(rs.getInt("extraHours"));
 				d.setTip(rs.getString("tip"));
 				Calendar c = Calendar.getInstance();
-				c.setTime(d.getDate());
+				c.setTime(d.getCalendar().getDate());
 				d.setDay(c.get(Calendar.DAY_OF_WEEK));
 				dsl.add(d);
 			}
@@ -137,15 +137,15 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 				d.setId(rs.getInt("id"));
 				d.setP(new PersonDAO().findById(rs.getInt("p_id")));
 				d.setM(new MonthStatusDAO().findById(rs.getInt("m_id")));
-				d.setDate(rs.getDate("date"));
 				d.setStartTime(rs.getTime("startTime"));
 				d.setEndTime(rs.getTime("endTime"));
 				d.setBreakHours(rs.getInt("breakHours"));
 				d.setWorkHours(rs.getInt("workHours"));
+				d.setCalendar(new CalendarService().findById(rs.getInt("d_id")));
 				d.setExtraHours(rs.getInt("extraHours"));
 				d.setTip(rs.getString("tip"));
 				Calendar c = new GregorianCalendar();
-				c.setTime(d.getDate());
+				c.setTime(d.getCalendar().getDate());
 				d.setDay(c.get(Calendar.DAY_OF_WEEK));
 				dsl.add(d);
 			}
@@ -158,7 +158,7 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 	}
 	
 	public List<DayStatus> findByPersonAndMonth(int p_id,int m_id) {
-		String sql = "select * from day_status where p_id=? and m_id=? group by date";
+		String sql = "select * from day_status where p_id=? and m_id=? group by d_id";
 		PreparedStatement pst = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -175,15 +175,15 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 				d.setId(rs.getInt("id"));
 				d.setP(new PersonDAO().findById(rs.getInt("p_id")));
 				d.setM(new MonthStatusDAO().findById(rs.getInt("m_id")));
-				d.setDate(rs.getDate("date"));
 				d.setStartTime(rs.getTime("startTime"));
 				d.setEndTime(rs.getTime("endTime"));
 				d.setBreakHours(rs.getInt("breakHours"));
 				d.setWorkHours(rs.getInt("workHours"));
 				d.setExtraHours(rs.getInt("extraHours"));
+				d.setCalendar(new CalendarService().findById(rs.getInt("d_id")));
 				d.setTip(rs.getString("tip"));
 				Calendar c = Calendar.getInstance();
-				c.setTime(d.getDate());
+				c.setTime(d.getCalendar().getDate());
 				d.setDay(c.get(Calendar.DAY_OF_WEEK));
 				dsl.add(d);
 			}

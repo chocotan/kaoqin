@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>Kaoqin</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -20,9 +20,17 @@
     <servlet-name>admin</servlet-name>
     <servlet-class>io.loli.kaoqin.servlet.AdminServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>calendar</servlet-name>
+    <servlet-class>io.loli.kaoqin.servlet.CalendarServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
     <url-pattern>/user/loginForm</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>calendar</servlet-name>
+    <url-pattern>/admin/createCalendar</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
@@ -48,15 +56,26 @@
     <servlet-name>admin</servlet-name>
     <url-pattern>/admin/admin</url-pattern>
   </servlet-mapping>
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>io.loli.kaoqin.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <jsp-config>
-  	<taglib>
-	  <taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
-	  <taglib-location>/WEB-INF/lib/fmt.tld</taglib-location>
-	</taglib>
-	<taglib>
-	  <taglib-uri>http://java.sun.com/jsp/jstl/c</taglib-uri>
-	  <taglib-location>/WEB-INF/lib/c.tld</taglib-location>
-	</taglib>
+    <taglib>
+      <taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
+      <taglib-location>/WEB-INF/lib/fmt.tld</taglib-location>
+    </taglib>
+    <taglib>
+      <taglib-uri>http://java.sun.com/jsp/jstl/c</taglib-uri>
+      <taglib-location>/WEB-INF/lib/c.tld</taglib-location>
+    </taglib>
   </jsp-config>
-  
 </web-app>

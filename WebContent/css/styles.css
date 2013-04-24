@@ -128,11 +128,6 @@ fieldset #error{
 	width:800px;
 }
 
- #dayList , .monthList{
- 	padding:50;
- 	margin:auto;
-	width:800px;
- }
 
 .menus li{
 	list-style:none;
@@ -148,8 +143,12 @@ fieldset #error{
 .menus a{
 	color:#3C3C3C;
 }
-.monthList{
-	top:100px;
+
+
+.addDayStatus , .editDayStatus , .updateInfo, #dayList,.monthList{
 	margin:10 auto;
 	width:800px;
+}
+.addDayStatus , .editDayStatus , .updateInfo, #dayList,.monthList{
+	padding-top:80px;
 }

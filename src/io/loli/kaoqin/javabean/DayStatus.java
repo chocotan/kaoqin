@@ -4,8 +4,6 @@ public class DayStatus {
 	private int id;
 	private Person p;
 	private MonthStatus m;
-	//这天的日期
-	private java.sql.Date date;
 	//开始时间
 	private java.sql.Time startTime;
 	//结束时间
@@ -16,6 +14,7 @@ public class DayStatus {
 	private int workHours;
 	//加班时间
 	private int extraHours;
+	private Calendar Calendar;
 	//星期几
 	private int day;
 	//作业内容
@@ -26,12 +25,7 @@ public class DayStatus {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public java.sql.Date getDate() {
-		return date;
-	}
-	public void setDate(java.sql.Date date) {
-		this.date = date;
-	}
+
 	public int getBreakHours() {
 		return breakHours;
 	}
@@ -85,5 +79,11 @@ public class DayStatus {
 	}
 	public void setTip(String tip) {
 		this.tip = tip;
+	}
+	public Calendar getCalendar() {
+		return Calendar;
+	}
+	public void setCalendar(Calendar calendar) {
+		Calendar = calendar;
 	}
 }

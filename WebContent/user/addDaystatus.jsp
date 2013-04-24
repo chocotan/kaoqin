@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="menu.jsp"></jsp:include>
+
+
+<div class="addDayStatus">
 <fmt:setBundle basename="io.loli.kaoqin.prop.info" />
 <style>
 body{font-size:12px;font-family:Verdana,Arial,"宋体";}
@@ -27,6 +32,7 @@ return document.getElementById(objID);
 <tr><td><fmt:message key="list.breakTime"></fmt:message></td><td><input value="1" type="text" size="2" name="breakhours"></td></tr>
 <tr><td><fmt:message key="list.extraTime"></fmt:message></td><td><input value="0" type="text" size="2" name="extrahours"></td></tr>
 <tr><td><fmt:message key="list.tip"></fmt:message></td><td><input value="" type="text" size="30" name="tip"></td></tr>
-<tr><td><input type="submit" value="提交"></td></tr>
+<tr><td><input type="submit" value="<fmt:message key="submit"/>"></td></tr>
 </table>
 </form>
+</div>

@@ -30,8 +30,6 @@ public class MonthStatusServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF8");
-		response.setCharacterEncoding("UTF8");
 		String action = (String)request.getParameter("action");
 		if(action.equals("submit")){
 			submit(request,response);
@@ -71,5 +69,4 @@ public class MonthStatusServlet extends HttpServlet {
 		ms.setApproved(true);
 		mss.update(ms);
 	}
-
 }

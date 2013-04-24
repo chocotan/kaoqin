@@ -17,7 +17,7 @@
 <% 
 	for(DayStatus ds:dsl){
 %>
-<tr><td><%=sdf1.format(ds.getDate())%></td><td><%=ds.getDay()%></td><td><%=sdf2.format(ds.getStartTime())%></td><td><%=sdf2.format(ds.getEndTime())%></td><td><%=ds.getWorkHours()%></td><td><%=ds.getBreakHours()%></td><td><%=ds.getExtraHours()%></td><td><%=ds.getTip()%></td>
+<tr><td><%=sdf1.format(ds.getCalendar().getDate())%></td><td><%=ds.getDay()%></td><td><%=sdf2.format(ds.getStartTime())%></td><td><%=sdf2.format(ds.getEndTime())%></td><td><%=ds.getWorkHours()%></td><td><%=ds.getBreakHours()%></td><td><%=ds.getExtraHours()%></td><td><%=ds.getTip()%></td>
 </tr>
 <%
 	}

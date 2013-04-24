@@ -41,41 +41,43 @@
 	</c:choose>
 	<table>
 		<tr class="header">
-			<td><fmt:message key="list.date"></fmt:message>
-			</td>
-			<td><fmt:message key="list.day"></fmt:message>
-			</td>
-			<td><fmt:message key="list.startTime"></fmt:message>
-			</td>
-			<td><fmt:message key="list.endTime"></fmt:message>
-			</td>
-			<td><fmt:message key="list.workTime"></fmt:message>
-			</td>
-			<td><fmt:message key="list.breakTime"></fmt:message>
-			</td>
-			<td><fmt:message key="list.extraTime"></fmt:message>
-			</td>
-			<td><fmt:message key="list.tip"></fmt:message>
-			</td>
+			<th><fmt:message key="list.date"></fmt:message>
+			</th>
+			<th><fmt:message key="list.day"></fmt:message>
+			</th>
+			<th><fmt:message key="list.startTime"></fmt:message>
+			</th>
+			<th><fmt:message key="list.endTime"></fmt:message>
+			</th>
+			<th><fmt:message key="list.workTime"></fmt:message>
+			</th>
+			<th><fmt:message key="list.breakTime"></fmt:message>
+			</th>
+			<th><fmt:message key="list.extraTime"></fmt:message>
+			</th>
+			<th><fmt:message key="list.tip"></fmt:message>
+			</th>
+			<th></th>
 		</tr>
 		<c:forEach var="ds" items="${dsl}">
 			<tr>
-				<td><fmt:formatDate value="${ds.date}" pattern="yyyy-MM-dd"></fmt:formatDate>
+				<td><fmt:formatDate value="${ds.calendar.date}" pattern="yyyy-MM-dd"></fmt:formatDate>
 				</td>
 				<td>${ds.day}</td>
-				<td><fmt:formatDate value="${ds.startTime}" pattern="HH:mm"></fmt:formatDate>
+				<td class="dst" id="dst-${ds.id}"><fmt:formatDate value="${ds.startTime}" pattern="HH:mm"></fmt:formatDate>
 				</td>
-				<td><fmt:formatDate value="${ds.endTime}" pattern="HH:mm"></fmt:formatDate>
+				<td class="det" id="det-${ds.id}"><fmt:formatDate value="${ds.endTime}" pattern="HH:mm"></fmt:formatDate>
 				</td>
-				<td>${ds.workHours}</td>
-				<td>${ds.breakHours}</td>
-				<td>${ds.extraHours}</td>
-				<td>${ds.tip}</td>
-				<td><c:if test="${m.submitted}">
-						<a href="editDayStatus.jsp?id=${ds.id}"><fmt:message
-								key="change"></fmt:message>
-						</a>
-					</c:if></td>
+				<td class="dwh" id="dwh-${ds.id}">${ds.workHours}</td>
+				<td class="dbh" id="dbh-${ds.id}">${ds.breakHours}</td>
+				<td class="deh" id="deh-${ds.id}">${ds.extraHours}</td>
+				<td class="dtip" id="dtip-${ds.id}">${ds.tip}</td>
+				<c:if test="${!m.submitted}">
+						<td>
+						<input type="button" onclick="change(${ds.id})" value="<fmt:message
+								key="change"></fmt:message>">
+						</td>
+					</c:if>
 			</tr>
 		</c:forEach>
 	</table>

@@ -35,8 +35,6 @@ public class LoginServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF8"); //$NON-NLS-1$
-		response.setCharacterEncoding("UTF8"); //$NON-NLS-1$
 		String action = (String)request.getParameter("action"); //$NON-NLS-1$
 		//判断是注册登录还是登出
 		if(action.equals("regist")){ //$NON-NLS-1$

@@ -66,7 +66,7 @@ function  checkForm(obj){
 		<div class="inputWrap"><input required placeholder="<fmt:message key="user.regist.form.password"/>" type="password" name="password"></div>
 		<div class="inputWrap"><input required placeholder="<fmt:message key="user.regist.form.repeatPassword"/>" type="password" name="repeatPassword"></div>
 		<div class="inputWrap"><input required placeholder="<fmt:message key="user.regist.form.tel"/>" type="text" name="tel"></div>
-		<div class="inputWrap"><input required placeholder="<fmt:message key="user.regist.form.email"/>" type="email" name="email"></div>
+		<div class="inputWrap"><input required placeholder="<fmt:message key="user.regist.form.email"/>" type="email" name="email" ></div>
 		<div class="inputWrap"><input required placeholder="<fmt:message key="user.regist.form.address"/>" type="text" name="address"></div>
 	</fieldset>
 	<fieldset>

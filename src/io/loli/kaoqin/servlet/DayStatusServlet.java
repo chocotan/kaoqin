@@ -1,12 +1,12 @@
 package io.loli.kaoqin.servlet;
 
+import io.loli.kaoqin.javabean.Calendar;
 import io.loli.kaoqin.javabean.DayStatus;
 import io.loli.kaoqin.javabean.Person;
+import io.loli.kaoqin.service.CalendarService;
 import io.loli.kaoqin.service.DayStatusService;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +46,6 @@ public class DayStatusServlet extends HttpServlet {
 	@SuppressWarnings("deprecation")
 	private void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DayStatus ds=new DayStatus();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		String dstr=request.getParameter("date");
 		int breakHours = Integer.parseInt(request.getParameter("breakhours"));
 		int workHours = Integer.parseInt(request.getParameter("workhours"));
@@ -58,13 +57,8 @@ public class DayStatusServlet extends HttpServlet {
 		String tip = request.getParameter("tip");
 		java.sql.Time startTime = new java.sql.Time(startTimeHour, startTimeMin, 0);
 		java.sql.Time endTime = new java.sql.Time(endTimeHour, endTimeMin, 0);
-		java.util.Date date = null;
-		try {
-			date = sdf.parse(dstr);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		ds.setDate(new java.sql.Date(date.getTime()));
+		Calendar calendar = new CalendarService().findByDate(dstr);
+		ds.setCalendar(calendar);
 		ds.setP((Person)request.getSession().getAttribute(("person")));
 		ds.setBreakHours(breakHours);
 		ds.setExtraHours(extraHours);
@@ -73,14 +67,12 @@ public class DayStatusServlet extends HttpServlet {
 		ds.setEndTime(endTime);
 		ds.setTip(tip);
 		dss.save(ds);
-		
+		response.sendRedirect("monthList.jsp");
 	}
 	
 	@SuppressWarnings("deprecation")
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DayStatus ds=new DayStatus();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		String dstr=request.getParameter("date");
+		DayStatus ds=dss.findById(Integer.parseInt(request.getParameter("id")));
 		int breakHours = Integer.parseInt(request.getParameter("breakhours"));
 		int workHours = Integer.parseInt(request.getParameter("workhours"));
 		int extraHours = Integer.parseInt(request.getParameter("extrahours"));
@@ -88,18 +80,9 @@ public class DayStatusServlet extends HttpServlet {
 		int startTimeMin = Integer.parseInt(request.getParameter("starttimemin"));
 		int endTimeHour = Integer.parseInt(request.getParameter("endtimehour"));
 		int endTimeMin = Integer.parseInt(request.getParameter("endtimemin"));
-		int id = Integer.parseInt(request.getParameter("id"));
 		String tip = request.getParameter("tip");
 		java.sql.Time startTime = new java.sql.Time(startTimeHour, startTimeMin, 0);
 		java.sql.Time endTime = new java.sql.Time(endTimeHour, endTimeMin, 0);
-		java.util.Date date = null;
-		try {
-			date = sdf.parse(dstr);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		ds.setId(id);
-		ds.setDate(new java.sql.Date(date.getTime()));
 		ds.setP((Person)request.getSession().getAttribute(("person")));
 		ds.setBreakHours(breakHours);
 		ds.setExtraHours(extraHours);
