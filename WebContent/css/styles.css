@@ -147,7 +147,7 @@ fieldset #error{
 
 .addDayStatus , .editDayStatus , .updateInfo, #dayList,.monthList{
 	margin:10 auto;
-	width:800px;
+	width:850px;
 }
 .addDayStatus , .editDayStatus , .updateInfo, #dayList,.monthList{
 	padding-top:80px;

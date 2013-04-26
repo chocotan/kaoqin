@@ -67,7 +67,12 @@ public class DayStatusServlet extends HttpServlet {
 		ds.setEndTime(endTime);
 		ds.setTip(tip);
 		dss.save(ds);
-		response.sendRedirect("monthList.jsp");
+		DayStatus nds = dss.findByPersonAndDate(ds.getP().getId(),calendar.getId());
+		if(null!=request.getParameter("kind")&&((String)(request.getParameter("kind"))).equals("ajax")){
+			response.getWriter().print(nds.getId());
+		}else{
+			response.sendRedirect("monthList.jsp");
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -91,5 +96,10 @@ public class DayStatusServlet extends HttpServlet {
 		ds.setEndTime(endTime);
 		ds.setTip(tip);
 		dss.update(ds);
+		if(null!=request.getParameter("kind")&&((String)(request.getParameter("kind"))).equals("ajax")){
+			response.getWriter().print("SUCCESS");
+		}else{
+			response.sendRedirect("monthList.jsp");
+		}
 	}
 }

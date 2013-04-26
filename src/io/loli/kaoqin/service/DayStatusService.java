@@ -63,4 +63,8 @@ public class DayStatusService {
 	public List<DayStatus> findByPersonAndMonth(int p_id, int m_id) {
 		return dsd.findByPersonAndMonth(p_id, m_id);
 	}
+	
+	public DayStatus findByPersonAndDate(int p_id,int d_id){
+		return dsd.findByPersonAndDate(p_id, d_id);
+	}
 }

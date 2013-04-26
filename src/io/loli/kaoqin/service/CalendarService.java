@@ -64,13 +64,7 @@ public class CalendarService {
 		return cd.findById(id);
 	}
 	
-	@SuppressWarnings("deprecation")
-	public Map<Calendar,Integer> listByYearAndMonth(int year ,int month){
-		List<Calendar> calendarList = cd.listByYearAndMonth(year, month);
-		Map<Calendar,Integer> map = new TreeMap<Calendar,Integer>();
-		for(Calendar calendar:calendarList){
-			map.put(calendar, calendar.getDate().getDay());
-		}
-		return map;
+	public List<Calendar> listByYearAndMonth(int year ,int month){
+		return cd.listByYearAndMonth(year, month);
 	}
 }

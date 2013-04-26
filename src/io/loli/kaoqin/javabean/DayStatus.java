@@ -14,7 +14,7 @@ public class DayStatus {
 	private int workHours;
 	//加班时间
 	private int extraHours;
-	private Calendar Calendar;
+	private Calendar calendar;
 	//星期几
 	private int day;
 	//作业内容
@@ -81,9 +81,9 @@ public class DayStatus {
 		this.tip = tip;
 	}
 	public Calendar getCalendar() {
-		return Calendar;
+		return calendar;
 	}
 	public void setCalendar(Calendar calendar) {
-		Calendar = calendar;
+		this.calendar = calendar;
 	}
 }

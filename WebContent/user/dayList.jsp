@@ -1,18 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import=" java.text.SimpleDateFormat,java.util.*,io.loli.kaoqin.service.*,io.loli.kaoqin.javabean.*" %>
+<%@ page import="java.text.SimpleDateFormat,java.util.*,io.loli.kaoqin.service.*,io.loli.kaoqin.javabean.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/c" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="head.jsp"></jsp:include>
 <jsp:include page="menu.jsp"></jsp:include>
 <fmt:setBundle basename="io.loli.kaoqin.prop.info" />
 <%
-	int p_id=Integer.parseInt(request.getParameter("p_id"));
-	int m_id=Integer.parseInt(request.getParameter("m_id"));
+	int p_id = Integer.parseInt(request.getParameter("p_id"));
+	int m_id = Integer.parseInt(request.getParameter("m_id"));
 	MonthStatus m = new MonthStatusService().findById(m_id);
-	List<DayStatus> dsl = new DayStatusService().findByPersonAndMonth(p_id, m_id);
+	List<DayStatus> dsl = new DayStatusService().findByPersonAndMonth(
+			p_id, m_id);
 	request.setAttribute("m", m);
 	request.setAttribute("dsl", dsl);
+	List<io.loli.kaoqin.javabean.Calendar> monthDateList = new CalendarService().listByYearAndMonth(m.getYear(), m.getMonth()+1);
+	request.setAttribute("mdl", monthDateList);
+	Map<io.loli.kaoqin.javabean.Calendar, DayStatus> map = new TreeMap<io.loli.kaoqin.javabean.Calendar, DayStatus>();
+	Iterator<io.loli.kaoqin.javabean.Calendar> ditr = monthDateList.iterator();
+	for (int i = 0; ditr.hasNext(); i++) {
+		io.loli.kaoqin.javabean.Calendar date = ditr.next();
+		try {
+			if (date.getDate().getDate() != dsl.get(i).getCalendar().getDate()
+					.getDate()) {
+				i--;
+				map.put(date, null);
+			} else {
+				map.put(date, dsl.get(i));
+			}
+		} catch (Exception e) {
+			map.put(date, null);
+		}
+	}
+	request.setAttribute("map", map);
 %>
 <div id="dayList">
 	<h3>
@@ -59,25 +79,39 @@
 			</th>
 			<th></th>
 		</tr>
-		<c:forEach var="ds" items="${dsl}">
-			<tr id="ds-${ds.id}">
-				<td><fmt:formatDate value="${ds.calendar.date}" pattern="yyyy-MM-dd"></fmt:formatDate>
+		<c:forEach var="e" items="${map}">
+			<tr id="ds-${e.key.id}" class="<c:choose><c:when test='${e.key.holiday}'>holiday</c:when><c:otherwise>workday</c:otherwise></c:choose>">
+				<td class="ddt" id="ddt-${e.key.id}"><fmt:formatDate value="${e.key.date}" pattern="yyyy-MM-dd"></fmt:formatDate>
 				</td>
-				<td>${ds.day}</td>
-				<td class="dst" id="dst-${ds.id}"><fmt:formatDate value="${ds.startTime}" pattern="HH:mm"></fmt:formatDate>
+				<td>${e.key.date.day}</td>
+				<td class="dst" id="dst-${e.key.id}"><fmt:formatDate value="${e.value.startTime}" pattern="HH:mm"></fmt:formatDate>
 				</td>
-				<td class="det" id="det-${ds.id}"><fmt:formatDate value="${ds.endTime}" pattern="HH:mm"></fmt:formatDate>
+				<td class="det" id="det-${e.key.id}"><fmt:formatDate value="${e.value.endTime}" pattern="HH:mm"></fmt:formatDate>
 				</td>
-				<td class="dwh" id="dwh-${ds.id}">${ds.workHours}</td>
-				<td class="dbh" id="dbh-${ds.id}">${ds.breakHours}</td>
-				<td class="deh" id="deh-${ds.id}">${ds.extraHours}</td>
-				<td class="dtip" id="dtip-${ds.id}">${ds.tip}</td>
-				<c:if test="${!m.submitted}">
-						<td class="dbt" id="dbt-${ds.id}">
-						<input type="button" onclick="change(${ds.id})" value="<fmt:message
+				<td class="dwh" id="dwh-${e.key.id}">${e.value.workHours}</td>
+				<td class="dbh" id="dbh-${e.key.id}">${e.value.breakHours}</td>
+				<td class="deh" id="dehh-${e.key.id}">${e.value.extraHours}</td>
+				<td class="dtip" id="dtip-${e.key.id}">${e.value.tip}</td>
+				<td class="dbt" id="dbt-${e.key.id}">
+					<c:if
+						test="${!m.submitted&&!e.key.holiday}">
+						<c:choose>
+							<c:when test="${e.value!=null}">
+								<input type="button" onclick="change(${e.key.id},${e.value.id})"
+									value="<fmt:message
 								key="change"></fmt:message>">
-						</td>
-					</c:if>
+
+							</c:when>
+							<c:otherwise>
+								<input type="button"
+									onclick="add(${e.key.id})"
+									value="<fmt:message
+								key="new"></fmt:message>">
+								
+							</c:otherwise>
+						</c:choose>
+					</c:if></td>
+				<td id="info-${e.key.id}" class="info"></td>
 			</tr>
 		</c:forEach>
 	</table>

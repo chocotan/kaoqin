@@ -137,7 +137,11 @@ public class CalendarDAO implements ICalendarDAO{
 		try {
 			conn=DBUtil.getConnection();
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, year + "-" + month+"%");
+			if(month<10){
+				pst.setString(1, year + "-0" + month+"%");
+			}else{
+				pst.setString(1, year + "-" + month+"%");
+			}
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()){
 				Calendar c = new Calendar();

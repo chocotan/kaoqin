@@ -161,7 +161,7 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 
 	// 查询指定p_id的所有MonthStatus
 	public List<MonthStatus> findByPersonId(int p_id) {
-		String sql = "select * from month_status where p_id=?";
+		String sql = "select * from month_status where p_id=? order by year desc , month desc";
 		PreparedStatement pst = null;
 		Connection conn = null;
 		ResultSet rs = null;

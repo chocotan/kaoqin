@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -194,5 +195,42 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 		}
 		return dsl;
 	}
-
+	
+	public DayStatus findByPersonAndDate(int p_id,int d_id){
+		String sql = "select * from day_status where p_id=? and d_id=?";
+		PreparedStatement pst = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		List<DayStatus> dsl = new ArrayList<DayStatus>();
+		try {
+			conn = DBUtil.getConnection();
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, p_id);
+			pst.setInt(2, d_id);
+			pst.execute();
+			rs = pst.getResultSet();
+			while (rs.next()) {
+				DayStatus d = new DayStatus();
+				d.setId(rs.getInt("id"));
+				d.setP(new PersonDAO().findById(rs.getInt("p_id")));
+				d.setM(new MonthStatusDAO().findById(rs.getInt("m_id")));
+				d.setStartTime(rs.getTime("startTime"));
+				d.setEndTime(rs.getTime("endTime"));
+				d.setCalendar(new CalendarService().findById(rs.getInt("d_id")));
+				d.setBreakHours(rs.getInt("breakHours"));
+				d.setWorkHours(rs.getInt("workHours"));
+				d.setExtraHours(rs.getInt("extraHours"));
+				d.setTip(rs.getString("tip"));
+				Calendar c = Calendar.getInstance();
+				c.setTime(d.getCalendar().getDate());
+				d.setDay(c.get(Calendar.DAY_OF_WEEK));
+				dsl.add(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.releaseConnection(pst, conn);
+		}
+		return dsl.get(0);
+	}
 }
