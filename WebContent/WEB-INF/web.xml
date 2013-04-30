@@ -1,73 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Kaoqin</display-name>
+  <display-name>kaoqin</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>login</servlet-name>
-    <servlet-class>io.loli.kaoqin.servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>addDayStatus</servlet-name>
-    <servlet-class>io.loli.kaoqin.servlet.DayStatusServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>monthStatus</servlet-name>
-    <servlet-class>io.loli.kaoqin.servlet.MonthStatusServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>admin</servlet-name>
-    <servlet-class>io.loli.kaoqin.servlet.AdminServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>calendar</servlet-name>
-    <servlet-class>io.loli.kaoqin.servlet.CalendarServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>login</servlet-name>
-    <url-pattern>/user/loginForm</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>calendar</servlet-name>
-    <url-pattern>/admin/createCalendar</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>login</servlet-name>
-    <url-pattern>/user/registForm</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>login</servlet-name>
-    <url-pattern>/user/updateForm</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>addDayStatus</servlet-name>
-    <url-pattern>/user/addDayStatus</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>monthStatus</servlet-name>
-    <url-pattern>/user/monthStatus</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>monthStatus</servlet-name>
-    <url-pattern>/admin/monthStatus</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>admin</servlet-name>
-    <url-pattern>/admin/admin</url-pattern>
-  </servlet-mapping>
-  <filter>
-    <filter-name>characterEncodingFilter</filter-name>
-    <filter-class>io.loli.kaoqin.filter.CharacterEncodingFilter</filter-class>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>characterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/kaoqin-servlet.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>   
+
+	<servlet>
+		<servlet-name>kaoqin</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>kaoqin</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
   <jsp-config>
     <taglib>
       <taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
