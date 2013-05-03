@@ -152,3 +152,71 @@ fieldset #error{
 .addDayStatus , .editDayStatus , .updateInfo, #dayList,.monthList{
 	padding-top:80px;
 }
+
+
+
+
+
+
+
+
+
+#dayListTable th { 
+font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+font-size:13px;
+color: #4f6b72; 
+border-right: 1px solid #C1DAD7; 
+border-bottom: 1px solid #C1DAD7; 
+border-top: 1px solid #C1DAD7; 
+letter-spacing: 2px; 
+text-transform: uppercase; 
+text-align: left; 
+padding: 6px 6px 6px 12px; 
+background: #CAE8EA  no-repeat; 
+} 
+
+#dayListTable th.nobg { 
+border-top: 0; 
+border-left: 0; 
+border-right: 1px solid #C1DAD7; 
+background: none; 
+} 
+
+#dayListTable td { 
+border-right: 1px solid #C1DAD7; 
+border-bottom: 1px solid #C1DAD7; 
+font-size:13px; 
+padding: 6px 6px 6px 12px; 
+color: #4f6b72;
+height:35px;
+} 
+
+
+#dayListTable td.alt { 
+background: #F5FAFA; 
+color: #797268; 
+} 
+
+#dayListTable th.spec { 
+border-left: 1px solid #C1DAD7; 
+border-top: 0; 
+background: #fff no-repeat; 
+font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif; 
+} 
+
+#dayListTable th.specalt { 
+border-left: 1px solid #C1DAD7; 
+border-top: 0; 
+background: #f5fafa no-repeat; 
+font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif; 
+color: #797268; 
+}
+#dayListTable tr{
+	 background-color:#FFF
+}
+#dayListTable tr.holiday{
+	background-color:rgb(224, 222, 222) !important;
+}
+#dayListTable th.hour-min{
+	width:100px;
+}

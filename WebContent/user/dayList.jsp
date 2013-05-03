@@ -59,15 +59,15 @@
 			<fmt:message key="no"></fmt:message>
 		</c:otherwise>
 	</c:choose>
-	<table>
+	<table id="dayListTable">
 		<tr class="header">
 			<th><fmt:message key="list.date"></fmt:message>
 			</th>
 			<th><fmt:message key="list.day"></fmt:message>
 			</th>
-			<th><fmt:message key="list.startTime"></fmt:message>
+			<th class="hour-min"><fmt:message key="list.startTime"></fmt:message>
 			</th>
-			<th><fmt:message key="list.endTime"></fmt:message>
+			<th class="hour-min"><fmt:message key="list.endTime"></fmt:message>
 			</th>
 			<th><fmt:message key="list.workTime"></fmt:message>
 			</th>
@@ -111,7 +111,6 @@
 							</c:otherwise>
 						</c:choose>
 					</c:if></td>
-				<td id="info-${e.key.id}" class="info"></td>
 			</tr>
 		</c:forEach>
 	</table>

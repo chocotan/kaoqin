@@ -19,6 +19,8 @@ public class DayStatus {
 	private int day;
 	//作业内容
 	private String tip;
+	//请假种类,0为未请假正常上班，1为上午请假，2为下午请假，3为请假一整天
+	private int type;
 	public int getId() {
 		return id;
 	}
@@ -85,5 +87,11 @@ public class DayStatus {
 	}
 	public void setCalendar(Calendar calendar) {
 		this.calendar = calendar;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 }

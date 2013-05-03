@@ -1,17 +1,16 @@
 package io.loli.kaoqin.dao;
 
+import io.loli.kaoqin.javabean.DayStatus;
+import io.loli.kaoqin.service.CalendarService;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import io.loli.kaoqin.javabean.DayStatus;
-import io.loli.kaoqin.service.CalendarService;
 
 public class DayStatusDAO implements IDAO<DayStatus>{
 	public int result;

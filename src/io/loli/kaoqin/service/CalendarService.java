@@ -1,12 +1,10 @@
 package io.loli.kaoqin.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import io.loli.kaoqin.dao.CalendarDAO;
 import io.loli.kaoqin.javabean.Calendar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarService {
 	private static CalendarDAO cd = new CalendarDAO();
@@ -50,8 +48,8 @@ public class CalendarService {
 	 * 
 	 * @param calendar
 	 */
-	public void updateDayList(List<Calendar> dayList) {
-		cd.update(dayList);
+	public void updateDayList(int[] ids ,boolean holiday) {
+		cd.update(ids,holiday);
 	}
 
 	/**

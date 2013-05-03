@@ -56,16 +56,16 @@ public class CalendarDAO implements ICalendarDAO{
 	}
 	
 	@Override
-	public void update(List<Calendar> calendarList){
+	public void update(int[] ids,boolean holiday){
 		String sql = "update Calendar set holiday=? where id=?";
 		PreparedStatement pst=null;
 		Connection conn=null;
 		try {
 			conn=DBUtil.getConnection();
 			pst = conn.prepareStatement(sql);
-			for(Calendar calendar : calendarList){
-				pst.setBoolean(1, calendar.isHoliday());
-				pst.setInt(2, calendar.getId());
+			for(int id : ids){
+				pst.setBoolean(1, holiday);
+				pst.setInt(2, id);
 				pst.addBatch();
 			}
 			pst.executeBatch();
