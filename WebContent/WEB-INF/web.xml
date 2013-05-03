@@ -24,6 +24,14 @@
     <servlet-name>calendar</servlet-name>
     <servlet-class>io.loli.kaoqin.servlet.CalendarServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>leave</servlet-name>
+    <servlet-class>io.loli.kaoqin.servlet.LeaveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>leave</servlet-name>
+    <url-pattern>/user/leave</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
     <url-pattern>/user/loginForm</url-pattern>

@@ -8,5 +8,6 @@
 	<li class="menu-item"><a href="addDaystatus.jsp"><fmt:message key="menu.addDayStatus"></fmt:message></a></li>
 	<li class="menu-item"><a href="info.jsp"><fmt:message key="menu.changeInfo"></fmt:message></a></li>
 	<li class="menu-item"><a href="loginForm?action=logout"><fmt:message key="menu.logout"></fmt:message></a></li>
+	<li class="menu-item"><a href="askForLeave.jsp"><fmt:message key="menu.leave"></fmt:message></a></li>
 </ul>
 </div>

@@ -72,7 +72,7 @@ public class CalendarServlet extends HttpServlet {
 			for(int i=0;i<temp2.length;i++){
 				ids2[i]=Integer.parseInt(temp2[i]);
 			}
-			cs.updateDayList(ids2, true);
+			cs.updateDayList(ids2, false);
 		}
 	}
 	
