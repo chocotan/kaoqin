@@ -1,4 +1,4 @@
-package io.loli.kaoqin.javabean;
+package io.loli.kaoqin.entity;
 
 public class Person {
 	private String username;

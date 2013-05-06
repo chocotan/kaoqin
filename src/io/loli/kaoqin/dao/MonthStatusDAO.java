@@ -1,6 +1,7 @@
 package io.loli.kaoqin.dao;
 
-import io.loli.kaoqin.javabean.MonthStatus;
+import io.loli.kaoqin.entity.MonthStatus;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthStatusDAO implements IDAO<MonthStatus>{
+public class MonthStatusDAO implements IMonthStatusDAO{
 	public int result;
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#save(io.loli.kaoqin.entity.MonthStatus)
+	 */
 	@Override
 	public void save(MonthStatus t) {
 		String sql = "insert into month_status (year,month,p_id) values (?,?,?);";
@@ -29,6 +33,9 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#update(io.loli.kaoqin.entity.MonthStatus)
+	 */
 	@Override
 	public void update(MonthStatus t) {
 		String sql = "update month_status set approved=?,submitted=? where id=?";
@@ -48,6 +55,9 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#delete(int)
+	 */
 	@Override
 	public void delete(int id) {
 		String sql = "delete from month_status where id=?";
@@ -65,6 +75,9 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#findById(int)
+	 */
 	@Override
 	public MonthStatus findById(int id) {
 		String sql = "select * from month_status where id=?";
@@ -95,6 +108,10 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 		return m;
 	}
 	//查询指定年月的MonthStatus列表
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#findByYearAndMonth(int, int)
+	 */
+	@Override
 	public List<MonthStatus> findByYearAndMonth(int year,int month){
 		String sql = "select * from month_status where year=? and month=?";
 		PreparedStatement pst = null;
@@ -127,6 +144,10 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 	}
 	
 	//根据year,month和person的id来查询出MonthStatus
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#findByYearAndMonth(int, int, int)
+	 */
+	@Override
 	public List<MonthStatus> findByYearAndMonth(int year,int month,int p_id){
 		String sql = "select * from month_status where year=? and month=? and p_id=?";
 		PreparedStatement pst = null;
@@ -160,6 +181,10 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 	}
 
 	// 查询指定p_id的所有MonthStatus
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#findByPersonId(int)
+	 */
+	@Override
 	public List<MonthStatus> findByPersonId(int p_id) {
 		String sql = "select * from month_status where p_id=? order by year desc , month desc";
 		PreparedStatement pst = null;
@@ -191,6 +216,10 @@ public class MonthStatusDAO implements IDAO<MonthStatus>{
 	}
 	
 	// 根据是否提交和是否通过来查询
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IMonthStatusDAO#findBySubmittedAndApproved(boolean, boolean)
+	 */
+	@Override
 	public List<MonthStatus> findBySubmittedAndApproved(boolean submitted,boolean approved) {
 		String sql = "select * from month_status where submitted=? and approved=?";
 		PreparedStatement pst = null;

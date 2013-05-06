@@ -1,6 +1,6 @@
 package io.loli.kaoqin.dao;
 
-import io.loli.kaoqin.javabean.DayStatus;
+import io.loli.kaoqin.entity.DayStatus;
 import io.loli.kaoqin.service.CalendarService;
 
 import java.sql.Connection;
@@ -12,8 +12,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class DayStatusDAO implements IDAO<DayStatus>{
+public class DayStatusDAO implements IDayStatusDAO{
 	public int result;
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#save(io.loli.kaoqin.entity.DayStatus)
+	 */
 	@Override
 	public void save(DayStatus t) {
 		String sql = "insert into day_status (p_id,m_id,d_id,startTime,endTime,breakHours,workHours,extraHours,tip) values (?,?,?,?,?,?,?,?,?);";
@@ -39,6 +42,9 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#update(io.loli.kaoqin.entity.DayStatus)
+	 */
 	@Override
 	public void update(DayStatus t) {
 		String sql = "update day_status set p_id=?,m_id=?,startTime=?,endTime=?,breakHours=?,workHours=?,extraHours=?,tip=? where id=?;";
@@ -64,6 +70,9 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#delete(int)
+	 */
 	@Override
 	public void delete(int id) {
 		String sql = "delete from day_status where id=?";
@@ -81,6 +90,9 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#findById(int)
+	 */
 	@Override
 	public DayStatus findById(int id) {
 		String sql = "select * from day_status where id=?";
@@ -120,6 +132,10 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#findByPerson(int)
+	 */
+	@Override
 	public List<DayStatus> findByPerson(int p_id) {
 		String sql = "select * from day_status where p_id=? group by date";
 		PreparedStatement pst = null;
@@ -157,6 +173,10 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 		return dsl;
 	}
 	
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#findByPersonAndMonth(int, int)
+	 */
+	@Override
 	public List<DayStatus> findByPersonAndMonth(int p_id,int m_id) {
 		String sql = "select * from day_status where p_id=? and m_id=? group by d_id";
 		PreparedStatement pst = null;
@@ -195,6 +215,10 @@ public class DayStatusDAO implements IDAO<DayStatus>{
 		return dsl;
 	}
 	
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IDayStatusDAO#findByPersonAndDate(int, int)
+	 */
+	@Override
 	public DayStatus findByPersonAndDate(int p_id,int d_id){
 		String sql = "select * from day_status where p_id=? and d_id=?";
 		PreparedStatement pst = null;

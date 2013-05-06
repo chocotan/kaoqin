@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.text.SimpleDateFormat,java.util.*,io.loli.kaoqin.service.*,io.loli.kaoqin.javabean.*" %>
+<%@ page import="java.text.SimpleDateFormat,java.util.*,io.loli.kaoqin.service.*,io.loli.kaoqin.entity.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/c" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="head.jsp"></jsp:include>
@@ -11,25 +11,25 @@
 	int m_id = Integer.parseInt(request.getParameter("m_id"));
 	MonthStatus m = new MonthStatusService().findById(m_id);
 	List<DayStatus> dsl = new DayStatusService().findByPersonAndMonth(
-			p_id, m_id);
+	p_id, m_id);
 	request.setAttribute("m", m);
 	request.setAttribute("dsl", dsl);
-	List<io.loli.kaoqin.javabean.Calendar> monthDateList = new CalendarService().listByYearAndMonth(m.getYear(), m.getMonth()+1);
+	List<io.loli.kaoqin.entity.Calendar> monthDateList = new CalendarService().listByYearAndMonth(m.getYear(), m.getMonth()+1);
 	request.setAttribute("mdl", monthDateList);
-	Map<io.loli.kaoqin.javabean.Calendar, DayStatus> map = new TreeMap<io.loli.kaoqin.javabean.Calendar, DayStatus>();
-	Iterator<io.loli.kaoqin.javabean.Calendar> ditr = monthDateList.iterator();
+	Map<io.loli.kaoqin.entity.Calendar, DayStatus> map = new TreeMap<io.loli.kaoqin.entity.Calendar, DayStatus>();
+	Iterator<io.loli.kaoqin.entity.Calendar> ditr = monthDateList.iterator();
 	for (int i = 0; ditr.hasNext(); i++) {
-		io.loli.kaoqin.javabean.Calendar date = ditr.next();
+		io.loli.kaoqin.entity.Calendar date = ditr.next();
 		try {
-			if (date.getDate().getDate() != dsl.get(i).getCalendar().getDate()
-					.getDate()) {
-				i--;
-				map.put(date, null);
-			} else {
-				map.put(date, dsl.get(i));
-			}
+	if (date.getDate().getDate() != dsl.get(i).getCalendar().getDate()
+			.getDate()) {
+		i--;
+		map.put(date, null);
+	} else {
+		map.put(date, dsl.get(i));
+	}
 		} catch (Exception e) {
-			map.put(date, null);
+	map.put(date, null);
 		}
 	}
 	request.setAttribute("map", map);

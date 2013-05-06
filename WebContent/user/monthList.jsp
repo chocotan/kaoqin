@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="io.loli.kaoqin.service.MonthStatusService,io.loli.kaoqin.javabean.*,java.util.*" %>
+<%@ page import="io.loli.kaoqin.service.MonthStatusService,io.loli.kaoqin.entity.*,java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/c" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setBundle basename="io.loli.kaoqin.prop.info" />

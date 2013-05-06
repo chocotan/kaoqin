@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.loli.kaoqin.javabean.Calendar;
+import io.loli.kaoqin.entity.Calendar;
 
 public class CalendarDAO implements ICalendarDAO{
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="io.loli.kaoqin.service.*,io.loli.kaoqin.javabean.*,java.util.*"%>
+<%@ page import="io.loli.kaoqin.service.*,io.loli.kaoqin.entity.*,java.util.*"%>
 <%
 	List<MonthStatus> ml = new MonthStatusService().findBySubmittedAndApproved(true, false);
 	request.setAttribute("ml", ml);

@@ -1,4 +1,4 @@
-package io.loli.kaoqin.javabean;
+package io.loli.kaoqin.entity;
 
 import java.sql.Date;
 
@@ -13,6 +13,7 @@ public class Leave {
 	private boolean approved;
 	private Person p;
 	private String tip;
+	private boolean submitted;
 	public int getId() {
 		return id;
 	}
@@ -72,5 +73,11 @@ public class Leave {
 	}
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+	public boolean isSubmitted() {
+		return submitted;
+	}
+	public void setSubmitted(boolean submitted) {
+		this.submitted = submitted;
 	}
 }

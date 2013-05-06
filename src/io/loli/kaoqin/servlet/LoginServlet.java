@@ -1,6 +1,6 @@
 package io.loli.kaoqin.servlet;
 
-import io.loli.kaoqin.javabean.Person;
+import io.loli.kaoqin.entity.Person;
 import io.loli.kaoqin.prop.LoginMessage;
 import io.loli.kaoqin.service.PersonService;
 

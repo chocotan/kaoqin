@@ -8,7 +8,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
+/**
+ * 字符编码过滤器
+ * @author ye
+ *
+ */
 public class CharacterEncodingFilter implements Filter {
 
 	protected FilterConfig filterConfig = null;

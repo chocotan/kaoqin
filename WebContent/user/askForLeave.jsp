@@ -2,19 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/c" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<head>
+<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="menu.jsp"></jsp:include>
+<body>
 <script type="text/javascript">
-
 var ie =navigator.appName=="Microsoft Internet Explorer"?true:false;
 function $(objID){
 return document.getElementById(objID);
 }
 </script>
-</head>
-<body>
+<script type="text/javascript" src="calendar.js"></script>
+<div class="askForLeave" style="margin:auto;">
 <fmt:setBundle basename="io.loli.kaoqin.prop.info"/>
 <script type="text/javascript" src="calendar.js"></script>
-<form action="leave">
+<form action="leave" method="post">
 <table>
 <input type="hidden" name="action" value="save">
 <tr><td colspan="2">
@@ -49,4 +50,5 @@ return document.getElementById(objID);
 </td></tr>
 </table>
 </form>
+</div>
 </body>

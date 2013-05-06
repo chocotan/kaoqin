@@ -2,7 +2,7 @@ package io.loli.kaoqin.dao;
 
 import java.util.List;
 
-import io.loli.kaoqin.javabean.Calendar;
+import io.loli.kaoqin.entity.Calendar;
 
 public interface ICalendarDAO {
 	void saveYear(List<Calendar> calendarList);

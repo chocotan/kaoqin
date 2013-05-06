@@ -1,8 +1,8 @@
 package io.loli.kaoqin.servlet;
 
-import io.loli.kaoqin.javabean.Calendar;
-import io.loli.kaoqin.javabean.DayStatus;
-import io.loli.kaoqin.javabean.Person;
+import io.loli.kaoqin.entity.Calendar;
+import io.loli.kaoqin.entity.DayStatus;
+import io.loli.kaoqin.entity.Person;
 import io.loli.kaoqin.service.CalendarService;
 import io.loli.kaoqin.service.DayStatusService;
 

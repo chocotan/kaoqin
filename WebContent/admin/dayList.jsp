@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import=" java.text.SimpleDateFormat,java.util.*,io.loli.kaoqin.service.*,io.loli.kaoqin.javabean.*" %>
+<%@ page import=" java.text.SimpleDateFormat,java.util.*,io.loli.kaoqin.service.*,io.loli.kaoqin.entity.*" %>
 <%
 	int p_id=Integer.parseInt(request.getParameter("p_id"));
 	int m_id=Integer.parseInt(request.getParameter("m_id"));

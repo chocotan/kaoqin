@@ -1,7 +1,8 @@
-package io.loli.kaoqin.javabean;
+package io.loli.kaoqin.entity;
 
 import java.sql.Date;
 
+@SuppressWarnings("rawtypes")
 public class Calendar implements Comparable{
 	private int id;
 	private boolean holiday;
@@ -24,6 +25,7 @@ public class Calendar implements Comparable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	@SuppressWarnings("deprecation")
 	@Override
 	public int compareTo(Object o) {
 		return this.date.getDate();

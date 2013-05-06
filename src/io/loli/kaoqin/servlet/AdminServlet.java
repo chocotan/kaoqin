@@ -1,7 +1,8 @@
 package io.loli.kaoqin.servlet;
 
 import io.loli.kaoqin.dao.AdminDAO;
-import io.loli.kaoqin.javabean.Admin;
+import io.loli.kaoqin.dao.IAdminDAO;
+import io.loli.kaoqin.entity.Admin;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminDAO ad;
+	private IAdminDAO ad;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

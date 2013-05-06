@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.loli.kaoqin.javabean.Person;
+import io.loli.kaoqin.entity.Person;
 
-public class PersonDAO implements IDAO<Person>{
+public class PersonDAO implements IPersonDAO{
 	public int result;
 	public PersonDAO(){}
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#save(io.loli.kaoqin.entity.Person)
+	 */
 	@Override
 	public void save(Person t) {
 		String sql = "insert into Person (username,password,tel,email,address) values (?,?,?,?,?);";
@@ -33,6 +36,10 @@ public class PersonDAO implements IDAO<Person>{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#saveAdmin(io.loli.kaoqin.entity.Person)
+	 */
+	@Override
 	public void saveAdmin(Person t) {
 		String sql = "insert into Person (username,password,isadmin) values (?,?,?);";
 		PreparedStatement pst=null;
@@ -51,6 +58,9 @@ public class PersonDAO implements IDAO<Person>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#update(io.loli.kaoqin.entity.Person)
+	 */
 	@Override
 	public void update(Person t) {
 		String sql = "update Person set " + "username=? ," + "password=? ,"
@@ -74,6 +84,9 @@ public class PersonDAO implements IDAO<Person>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#delete(int)
+	 */
 	@Override
 	public void delete(int t) {
 		String sql = "delete from Person where id=?";
@@ -91,6 +104,9 @@ public class PersonDAO implements IDAO<Person>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#findById(int)
+	 */
 	@Override
 	public Person findById(int id) {
 		String sql = "select * from Person where id=?";
@@ -122,6 +138,10 @@ public class PersonDAO implements IDAO<Person>{
 		return p;
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#findByUsername(java.lang.String)
+	 */
+	@Override
 	public List<Person> findByUsername(String username) {
 		String sql = "select * from Person where username=?";
 		PreparedStatement pst = null;
@@ -153,6 +173,10 @@ public class PersonDAO implements IDAO<Person>{
 		return pl;
 	}
 	
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#list(int, int)
+	 */
+	@Override
 	public List<Person> list(int startIndex, int count) {
 		String sql = "select * from Person limit startIndex, count";
 		PreparedStatement pst = null;
@@ -185,6 +209,10 @@ public class PersonDAO implements IDAO<Person>{
 		return pl;
 	}
 
+	/* (non-Javadoc)
+	 * @see io.loli.kaoqin.dao.IPersonDAO#listAll()
+	 */
+	@Override
 	public List<Person> listAll() {
 		String sql = "select * from Person";
 		PreparedStatement pst = null;

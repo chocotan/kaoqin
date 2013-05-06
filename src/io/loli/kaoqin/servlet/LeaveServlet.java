@@ -1,7 +1,7 @@
 package io.loli.kaoqin.servlet;
 
-import io.loli.kaoqin.javabean.Leave;
-import io.loli.kaoqin.javabean.Person;
+import io.loli.kaoqin.entity.Leave;
+import io.loli.kaoqin.entity.Person;
 import io.loli.kaoqin.service.LeaveService;
 
 import java.io.IOException;
@@ -20,11 +20,34 @@ public class LeaveServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		if(action.equals("save")){
 			this.save(request, response);
+		}else if(action.equals("back")){
+			this.back(request,response);
+		}else if(action.equals("accept")){
+			this.accept(request, response);
 		}
+	}
+	//拒绝请假申请
+	private void back(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Leave leave = ls.findById(id);
+		leave.setSubmitted(false);
+		ls.update(leave);
+		response.sendRedirect(request.getHeader("REFERER"));
+	}
+
+	//通过请假申请
+	private void accept(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Leave leave = ls.findById(id);
+		leave.setApproved(true);
+		ls.update(leave);
+		response.sendRedirect(request.getHeader("REFERER"));
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
+	//用户提交请假申请
 	private void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String startDateString = request.getParameter("startDate");
@@ -91,6 +114,7 @@ public class LeaveServlet extends HttpServlet {
 		leave.setStartDate(startDate);
 		leave.setStartMorning(startMorning);
 		leave.setTip(tip);
+		leave.setSubmitted(true);
 		ls.save(leave);
 	}
 }

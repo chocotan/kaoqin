@@ -1,6 +1,6 @@
 package io.loli.kaoqin.servlet;
 
-import io.loli.kaoqin.javabean.MonthStatus;
+import io.loli.kaoqin.entity.MonthStatus;
 import io.loli.kaoqin.service.MonthStatusService;
 
 import java.io.IOException;

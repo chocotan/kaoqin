@@ -82,9 +82,9 @@ public class CalendarServlet extends HttpServlet {
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		CalendarService  cs = new CalendarService();
-		List<io.loli.kaoqin.javabean.Calendar> calendarList = cs.listByYearAndMonth(year, month);
-		Map<io.loli.kaoqin.javabean.Calendar,Integer> map = new TreeMap<io.loli.kaoqin.javabean.Calendar,Integer>();
-		for(io.loli.kaoqin.javabean.Calendar calendar :calendarList){
+		List<io.loli.kaoqin.entity.Calendar> calendarList = cs.listByYearAndMonth(year, month);
+		Map<io.loli.kaoqin.entity.Calendar,Integer> map = new TreeMap<io.loli.kaoqin.entity.Calendar,Integer>();
+		for(io.loli.kaoqin.entity.Calendar calendar :calendarList){
 			map.put(calendar, calendar.getDate().getDay());
 		}
 		request.setAttribute("map", map);
