@@ -117,4 +117,8 @@ public class LeaveServlet extends HttpServlet {
 		leave.setSubmitted(true);
 		ls.save(leave);
 	}
+	
+	public void list(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
+		
+	}
 }

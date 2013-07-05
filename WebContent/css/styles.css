@@ -156,7 +156,7 @@ fieldset label {
 	margin: 0 5 0 0;
 }
 
-fieldset #error {
+fieldset .error {
 	color: red;
 }
 

@@ -52,8 +52,10 @@ $(function(){
 					<input type="submit"
 						value="<fmt:message key="user.login.form.submit"/>"> <a
 						href="register.jsp"><fmt:message key="user.login.regist" /></a>
+					<label class="error"><c:out value="${info}"></c:out>
+					</label>
 				</fieldset>
-				<c:out value="${info}"></c:out>
+				
 			</div>
 			</section>
 		</form>

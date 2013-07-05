@@ -35,6 +35,7 @@ public class AdminServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		String action = request.getParameter("action");
 		if (action.equals("login")) {
 			login(request, response);
